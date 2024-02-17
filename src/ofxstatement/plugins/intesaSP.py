@@ -180,6 +180,7 @@ class Movimento_V2(Movimento):
             'commissioni': 'SRVCHG',
             'imposte, bolli e commissioni': 'FEE',
             'pedaggi e telepass': 'FEE',
+            'prodotti vista e udito': 'POS',
             'rate mutuo e finanziamento': 'REPEATPMT',
             'regali ricevuti': 'CREDIT',
             'rimborsi spese e storni': 'CREDIT',
@@ -190,11 +191,12 @@ class Movimento_V2(Movimento):
             'tv, internet, telefono': 'POS',
             'tabaccai e simili': 'POS',
             'tempo libero varie': 'POS',
+            'trasporti, noleggi, taxi e parcheggi': 'POS'
             'viaggi e vacanze': 'POS'
         }
 
         try:
-            cur_transaction = category_map[self.categoria.lower()]
+            cur_transaction = category_map[self.categoria.lower()] #TODO: trim end category
         except KeyError:
             cur_transaction = 'CREDIT' if self.importo >= 0 else 'DEBIT'
             logging.warning(
